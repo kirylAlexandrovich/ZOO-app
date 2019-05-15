@@ -1,0 +1,1 @@
+{"0":{"name":"elephant","size":20,"type":"herbivore"}}{"0":{"name":"lion","size":5,"type":"predator"}}
