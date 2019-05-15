@@ -21,4 +21,5 @@ model.addAnimal('lion', 5, 'predator');
 model.addAnimal('monkey', 2, 'omnivorous');
 model.addAnimal('cow', 10, 'herbivore');
 
+
 // module.exports = Model;

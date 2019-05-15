@@ -1,29 +1,26 @@
-/* eslint-disable class-methods-use-this */
 const fs = require('mz/fs');
 
 class Ds {
     constructor() {
-        this.id = new Date().getMilliseconds();
         this.bufer = [];
         this.fileStatus = true;
     }
 
     write(fileName, content) {
         const writer = (obj) => {
-            // eslint-disable-next-line no-param-reassign
-            obj[this.id] = content;
+            const animalObj = obj;
+            animalObj[new Date().getTime()] = content;
 
-            fs.writeFile(fileName, JSON.stringify(obj), 'utf8', (error) => {
+            fs.writeFile(fileName, JSON.stringify(animalObj), 'utf8', (error) => {
                 if (error) throw error;
                 this.fileStatus = true;
 
                 if (this.bufer.length > 0) {
-                    const args = this.bufer.splice(0, 1);
+                    const args = this.bufer.shift();
 
-                    this.write(args[0].fileName, args[0].content);
+                    this.write(args.fileName, args.content);
                 }
             });
-            this.id += 1;
         };
 
         if (this.fileStatus === true) {
@@ -45,32 +42,32 @@ class Ds {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    read(fileName, id) {
-        if (!id && !fileName) {
-            console.log('Not id or fileName on read');
-            return null;
-        }
-        // else if (true) {
-        //     fs.open();
-        // }
+    // read(fileName, id) {
+    //     if (!fileName) {
+    //         console.log('Not fileName for read');
+    //         return null;
+    //     }
 
-        const content = fs.readFile(fileName);
-        const objContent = JSON.parse(content);
-        if (id) {
-            console.log(objContent[id]);
-            return objContent[id];
-        }
-        console.log(objContent);
-        return objContent;
-    }
+    //     if (this.fileStatus === true) {
+    //         const ffff = fs.createReadStream(fileName);
+    //         console.log(ffff.read());
+    //         const objContent = JSON.parse(fs.createReadStream(fileName));
+    //         if (id) {
+    //             console.log(objContent[id]);
+    //             return objContent[id];
+    //         }
+    //         console.log(objContent);
+    //         return objContent;
+    //     }
+    //     return null;
+    // }
 }
 
 module.exports = Ds;
 
-// const ds = new Ds();
+const ds = new Ds();
 // ds.write('animals.json', 'lion', 5, 'predator');
 
 // ds.write('animals.json', 'monkey', 2, 'omnivorous');
 
-// ds.read('animals.json');
+ds.read('animals.json');
