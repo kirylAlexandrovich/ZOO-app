@@ -21,5 +21,6 @@ model.addAnimal('lion', 5, 'predator');
 model.addAnimal('monkey', 2, 'omnivorous');
 model.addAnimal('cow', 10, 'herbivore');
 
-
+model.read('animals.json', ['1557993011425', '1557993042948']);
+// model.remove('animals.json', ['1557995581955', '1557995581956']);
 // module.exports = Model;
